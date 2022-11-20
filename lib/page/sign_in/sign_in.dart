@@ -137,9 +137,11 @@ class _SignInState extends State<SignIn> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        SizedBox(width: 12),
         Container(
           child: TextButton(
             onPressed: () => controller.onRegisterButtonClicked(),
+            style: TextButton.styleFrom(),
             child: const Text(
               'Register now',
             ),
