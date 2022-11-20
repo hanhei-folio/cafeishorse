@@ -1,17 +1,20 @@
 import 'package:fetching_data/manager/dio_manager/dio_manager.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 
-
 class CafeInterface {
-  static Future<List<CafeModel>> getCafes() async {
-    var resBody = await DioManager().get('/quiz/cafe?count=7');
+  static Future<List<CafeModel>> get(
+      List<String> pickedKeywords, String pickedDistance) async {
+    // TODO 선택한 키워드와 거리 정보를 전달하기
+    var resBody = await DioManager().get('/quiz/cafe?count=100');
 
-    List<CafeModel> list = (resBody['data'] as List<dynamic>).map((e) => CafeModel.fromJson(
-      e as Map<String,dynamic>)).toList();
-    // for(var e in resBody){
-    //   CafeModel.fromJson(e);
-    // }
-    // return CafeModel.fromJson(resBody[0]);
-    return list;
+    List<CafeModel> ret = [];
+
+    if (resBody['data'] != null) {
+      for (var e in resBody['data']) {
+        ret.add(CafeModel.fromJson(e));
+      }
+    }
+
+    return ret;
   }
 }

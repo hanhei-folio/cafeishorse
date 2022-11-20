@@ -47,7 +47,7 @@ class _ChooseDistanceState extends State<ChooseDistance> {
                   child: Align(
                       alignment: Alignment.bottomRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.onNextButtonClicked(),
                         child: Text('다음'),
                       ))),
             ],

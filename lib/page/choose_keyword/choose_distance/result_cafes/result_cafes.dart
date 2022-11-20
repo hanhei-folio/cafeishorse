@@ -1,4 +1,8 @@
+import 'package:fetching_data/model/cafe_model.dart';
 import 'package:fetching_data/page/choose_keyword/choose_distance/result_cafes/result_cafes_controller.dart';
+import 'package:fetching_data/widget/cafe_tile.dart';
+import 'package:fetching_data/widget/error_text.dart';
+import 'package:fetching_data/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class ResultCafes extends StatefulWidget {
@@ -16,12 +20,42 @@ class _ResultCafesState extends State<ResultCafes> {
 
   @override
   void initState() {
-    controller = ResultCafesController(context, () => setState(() {}));
+    controller = ResultCafesController(context, () => setState(() {}),
+        widget.pickedKeywords, widget.pickedDistance);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: _body(),
+      ),
+    );
+  }
+
+  Widget _body() {
+    if (controller.status == 0) {
+      return LoadingWidget();
+    }
+
+    if (controller.status == 2) {
+      return ErrorText();
+    }
+
+    List<CafeModel> cafes = controller.cafes;
+
+    if (cafes.isEmpty) {
+      return Center(child: Text('조건에 부합하는 카페 데이터가 없습니다.'));
+    }
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          for (var cafe in cafes)
+            CafeTile(cafe)
+        ],
+      ),
+    );
   }
 }
