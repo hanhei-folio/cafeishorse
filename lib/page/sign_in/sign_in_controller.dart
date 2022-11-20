@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/manager/toast_manager.dart';
 import 'package:fetching_data/page/sign_up/sign_up.dart';
+import 'package:fetching_data/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../interface/user_interface.dart';
@@ -33,25 +34,36 @@ class SignInController {
       return;
     }
 
-    int loginResult = await UserInterface.checkLoginVaildate(email,password);
-    if (loginResult == 1) {
-      ToastManager.toastInfo('잘못된 이메일 또는 비밀번호입니다. 다시 입력해주세요.');
-      return;
+    late BuildContext loadingWidgetContext;
+    showDialog(
+        context: context,
+        builder: (cont) {
+          loadingWidgetContext = cont;
+          return LoadingWidget();
+        });
+    try {
+      int loginResult = await UserInterface.checkLoginVaildate(email, password);
+      if (loginResult == 1) {
+        Navigator.pop(loadingWidgetContext);
+        ToastManager.toastInfo('잘못된 이메일 또는 비밀번호입니다. 다시 입력해주세요.');
+        return;
+      }
+
+      if (loginResult == 2) {
+        Navigator.pop(loadingWidgetContext);
+        ToastManager.toastInfo('통신 중 에러가 발생했습니다.');
+        return;
+      }
+
+      if (loginResult == 0) {
+        Navigator.pop(loadingWidgetContext);
+        NavigatorManager.pushReplaceAll(context, (context) => const Home());
+      }
+    } catch (e, s) {
+      print(e);
+      print(s);
+      Navigator.pop(loadingWidgetContext);
     }
-
-    if (loginResult == 2) {
-      ToastManager.toastInfo('통신 중 에러가 발생했습니다.');
-      return;
-    }
-
-    if(loginResult==0) {
-      NavigatorManager.pushReplaceAll(context, (context) => const Home());
-    }
-    // 서버 통신
-
-    // 결과 1) 로그인 성공, 홈화면으로 진입
-
-    // 결과 2) 로그인 실패, 알림
   }
 
   void onRegisterButtonClicked() {

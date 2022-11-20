@@ -1,19 +1,22 @@
+import 'package:fetching_data/page/choose_keyword/choose_distance/choose_distance_controller.dart';
 import 'package:fetching_data/page/choose_keyword/choose_keyword_controller.dart';
 import 'package:flutter/material.dart';
 
-class ChooseKeyword extends StatefulWidget {
-  const ChooseKeyword({Key? key}) : super(key: key);
+class ChooseDistance extends StatefulWidget {
+  ChooseDistance(this.pickedKeywords);
+
+  List<String> pickedKeywords;
 
   @override
-  State<ChooseKeyword> createState() => _ChooseKeywordState();
+  State<ChooseDistance> createState() => _ChooseDistanceState();
 }
 
-class _ChooseKeywordState extends State<ChooseKeyword> {
-  late ChooseKeywordController controller;
+class _ChooseDistanceState extends State<ChooseDistance> {
+  late ChooseDistanceController controller;
 
   @override
   void initState() {
-    controller = ChooseKeywordController(context, () => setState(() {}));
+    controller = ChooseDistanceController(context, () => setState(() {}), widget.pickedKeywords);
     super.initState();
   }
 
@@ -28,7 +31,7 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
               Spacer(),
               Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('카페를 고를 때 당신의 선호도는?\n중요한 순서대로 골라주세요.',
+                  child: Text('카페와의 거리는 몇 m 이내로 추천할까요?',
                       style: TextStyle(fontSize: 24))),
               SizedBox(height: 48),
               Wrap(
@@ -36,7 +39,7 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
                 runSpacing: 12,
                 alignment: WrapAlignment.center,
                 children: [
-                  for (int i = 0; i < 5; i++) _keywordTile(i),
+                  for (int i = 0; i < 5; i++) _distanceTile(i),
                 ],
               ),
               Expanded(
@@ -53,8 +56,8 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
     );
   }
 
-  Widget _keywordTile(int index) {
-    String keyword = controller.keywords[index];
+  Widget _distanceTile(int index) {
+    String keyword = controller.distances[index];
 
     bool isPicked = controller.pickedKeywords.contains(keyword);
     String number = isPicked
@@ -64,7 +67,7 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
 
     if (isPicked) {
       return GestureDetector(
-        onTap: () => controller.onKeywordClicked(index),
+        onTap: () => controller.onDistanceClicked(index),
         child: Container(
           width: 80,
           height: 40,
@@ -78,7 +81,7 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
       );
     } else {
       return GestureDetector(
-        onTap: () => controller.onKeywordClicked(index),
+        onTap: () => controller.onDistanceClicked(index),
         child: Container(
           width: 80,
           height: 40,

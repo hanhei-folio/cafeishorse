@@ -1,26 +1,27 @@
 import 'package:fetching_data/manager/toast_manager.dart';
 import 'package:flutter/cupertino.dart';
 
-class ChooseKeywordController {
-  ChooseKeywordController(this.context, this.refresh);
+class ChooseDistanceController {
+  ChooseDistanceController(this.context, this.refresh, this.pickedKeywords);
 
   BuildContext context;
   VoidCallback refresh;
+  List<String> pickedKeywords;
 
-  List<String> keywords = ['가성비', '청결', '맛', '분위기', '친절'];
-  List<String> pickedKeywords = [];
+  List<String> distances = ['100m', '200m', '500m', '1km'];
+  List<String> pickedDistances = [];
 
-  void onKeywordClicked(int index) {
-    String keyword = keywords[index];
+  void onDistanceClicked(int index) {
+    String distance = distances[index];
 
-    if (pickedKeywords.contains(keyword)) {
-      pickedKeywords.remove(keyword);
+    if (pickedDistances.contains(distance)) {
+      pickedDistances.remove(distance);
     } else {
-      if (pickedKeywords.length == 3) {
-        ToastManager.toastInfo('3개까지만 선택 가능해요.');
+      if (pickedDistances.length == 1) {
+        ToastManager.toastInfo('1개만 선택 가능해요.');
         return;
       }
-      pickedKeywords.add(keyword);
+      pickedDistances.add(distance);
     }
 
     refresh();

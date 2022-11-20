@@ -1,4 +1,6 @@
+import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/manager/toast_manager.dart';
+import 'package:fetching_data/page/choose_keyword/choose_distance/choose_distance.dart';
 import 'package:flutter/cupertino.dart';
 
 class ChooseKeywordController {
@@ -24,5 +26,14 @@ class ChooseKeywordController {
     }
 
     refresh();
+  }
+
+  void onNextButtonClicked() {
+    if (pickedKeywords.length != 3) {
+      ToastManager.toastInfo('키워드 3개를 선택해주세요.');
+      return;
+    }
+
+    NavigatorManager.push(context, (context) => ChooseDistance(pickedKeywords));
   }
 }
