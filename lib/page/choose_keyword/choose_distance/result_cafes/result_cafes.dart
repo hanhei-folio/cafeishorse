@@ -49,13 +49,34 @@ class _ResultCafesState extends State<ResultCafes> {
       return Center(child: Text('조건에 부합하는 카페 데이터가 없습니다.'));
     }
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          for (var cafe in cafes)
-            CafeTile(cafe)
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(height: 12),
+        Row(
+          children: [
+            SizedBox(width: 12),
+            OutlinedButton(onPressed: () {}, child: Text('거리순')),
+            SizedBox(width: 12),
+            OutlinedButton(onPressed: () {}, child: Text('찜순')),
+            Spacer(),
+            OutlinedButton(onPressed: () {}, child: Text('돌아가기')),
+            SizedBox(width: 12),
+          ],
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(left: 12, right: 12, top: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  for (var cafe in cafes)
+                    CafeTile(cafe)
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
