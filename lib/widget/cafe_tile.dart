@@ -1,6 +1,5 @@
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class CafeTile extends StatelessWidget {
   CafeTile(this.cafe);

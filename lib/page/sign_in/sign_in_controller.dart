@@ -45,7 +45,7 @@ class SignInController {
     }
 
     if(loginResult==0) {
-      NavigatorManager.push(context, (context) => const Home());
+      NavigatorManager.pushReplaceAll(context, (context) => const Home());
     }
     // 서버 통신
 

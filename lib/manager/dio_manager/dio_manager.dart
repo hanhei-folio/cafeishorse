@@ -1,7 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:fetching_data/constant/constants.dart';
 import 'package:fetching_data/manager/dio_manager/dio_error_handler.dart';
 import 'package:fetching_data/manager/dio_manager/dio_token_handler.dart';
-import 'package:dio/dio.dart';
 
 class DioManager {
   DioManager._constructor();
