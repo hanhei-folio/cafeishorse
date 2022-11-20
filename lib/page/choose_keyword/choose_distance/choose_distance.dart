@@ -16,7 +16,8 @@ class _ChooseDistanceState extends State<ChooseDistance> {
 
   @override
   void initState() {
-    controller = ChooseDistanceController(context, () => setState(() {}), widget.pickedKeywords);
+    controller = ChooseDistanceController(
+        context, () => setState(() {}), widget.pickedKeywords);
     super.initState();
   }
 
@@ -39,7 +40,7 @@ class _ChooseDistanceState extends State<ChooseDistance> {
                 runSpacing: 12,
                 alignment: WrapAlignment.center,
                 children: [
-                  for (int i = 0; i < 5; i++) _distanceTile(i),
+                  for (int i = 0; i < 4; i++) _distanceTile(i),
                 ],
               ),
               Expanded(
@@ -57,13 +58,9 @@ class _ChooseDistanceState extends State<ChooseDistance> {
   }
 
   Widget _distanceTile(int index) {
-    String keyword = controller.distances[index];
+    String distance = controller.distances[index];
 
-    bool isPicked = controller.pickedKeywords.contains(keyword);
-    String number = isPicked
-        ? (controller.pickedKeywords.indexOf(keyword) + 1).toString()
-        : '';
-    String text = number.isEmpty ? keyword : '$number. $keyword';
+    bool isPicked = controller.pickedDistance == distance;
 
     if (isPicked) {
       return GestureDetector(
@@ -76,7 +73,7 @@ class _ChooseDistanceState extends State<ChooseDistance> {
             borderRadius: BorderRadius.circular(36),
           ),
           child:
-              Center(child: Text(text, style: TextStyle(color: Colors.white))),
+              Center(child: Text(distance, style: TextStyle(color: Colors.white))),
         ),
       );
     } else {
@@ -91,7 +88,7 @@ class _ChooseDistanceState extends State<ChooseDistance> {
             borderRadius: BorderRadius.circular(36),
           ),
           child:
-              Center(child: Text(text, style: TextStyle(color: Colors.black))),
+              Center(child: Text(distance, style: TextStyle(color: Colors.black))),
         ),
       );
     }

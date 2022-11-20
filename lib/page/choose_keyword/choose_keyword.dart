@@ -43,7 +43,7 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
                   child: Align(
                       alignment: Alignment.bottomRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.onNextButtonClicked(),
                         child: Text('다음'),
                       ))),
             ],
