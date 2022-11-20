@@ -25,11 +25,12 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
+              Spacer(),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('카페를 고를 때 당신의 선호도는?\n중요한 순서대로 골라주세요.',
                       style: TextStyle(fontSize: 24))),
-              SizedBox(height: 24),
+              SizedBox(height: 48),
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
@@ -37,7 +38,14 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
                 children: [
                   for (int i = 0; i < 5; i++) _keywordTile(i),
                 ],
-              )
+              ),
+              Expanded(
+                  child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text('다음'),
+                      ))),
             ],
           ),
         ),
