@@ -19,6 +19,70 @@ class _ChooseKeywordState extends State<ChooseKeyword> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('카페를 고를 때 당신의 선호도는?\n중요한 순서대로 골라주세요.',
+                      style: TextStyle(fontSize: 24))),
+              SizedBox(height: 24),
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                alignment: WrapAlignment.center,
+                children: [
+                  for (int i = 0; i < 5; i++) _keywordTile(i),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _keywordTile(int index) {
+    String keyword = controller.keywords[index];
+
+    bool isPicked = controller.pickedKeywords.contains(keyword);
+    String number = isPicked
+        ? (controller.pickedKeywords.indexOf(keyword) + 1).toString()
+        : '';
+    String text = number.isEmpty ? keyword : '$number. $keyword';
+
+    if (isPicked) {
+      return GestureDetector(
+        onTap: () => controller.onKeywordClicked(index),
+        child: Container(
+          width: 80,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.brown,
+            borderRadius: BorderRadius.circular(36),
+          ),
+          child:
+              Center(child: Text(text, style: TextStyle(color: Colors.white))),
+        ),
+      );
+    } else {
+      return GestureDetector(
+        onTap: () => controller.onKeywordClicked(index),
+        child: Container(
+          width: 80,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(36),
+          ),
+          child:
+              Center(child: Text(text, style: TextStyle(color: Colors.black))),
+        ),
+      );
+    }
   }
 }
