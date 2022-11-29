@@ -6,6 +6,7 @@ import 'package:fetching_data/widget/error_text.dart';
 import 'package:fetching_data/widget/loading_widget.dart';
 import 'package:fetching_data/widget/review_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 
 class CafeDetail extends StatefulWidget {
   CafeDetail(this.cafe);
@@ -62,7 +63,14 @@ class _CafeDetailState extends State<CafeDetail> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   Spacer(),
-                  Icon(Icons.favorite)
+                  if (controller.isUserLikingThisCafe != null)
+                  LikeButton(
+                    isLiked: controller.isUserLikingThisCafe,
+                    onTap: (value) async {
+                      await controller.onLikeButtonClicked();
+                    },
+                    bubblesSize: 0,
+                  ),
                 ],
               ),
               SizedBox(height: 6),

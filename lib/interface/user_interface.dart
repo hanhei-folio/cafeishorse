@@ -7,7 +7,6 @@ class UserInterface {
       var resBody = await DioManager()
           .get('/login/sign_up/double_check', query: {'email': email});
 
-
       if (resBody['message'].toString() == 'Success') {
         return 0;
       } else if (resBody['message'].toString() == 'Fail') {
@@ -30,8 +29,8 @@ class UserInterface {
 //           .get('/user', query: {'email': email});
 
       if (resBody['message'].toString() == 'Success') {
-        var postResBody=await DioManager().post('/login/sign_up/register',requestBody: {'email':email,'password':password});
-
+        var postResBody = await DioManager().post('/login/sign_up/register',
+            requestBody: {'email': email, 'password': password});
 
         return 0;
       } else if (resBody['message'].toString() == 'Fail') {
@@ -46,12 +45,10 @@ class UserInterface {
     return 1;
   }
 
-
-  static Future<int> checkLoginVaildate(String email,String password) async {
+  static Future<int> checkLoginVaildate(String email, String password) async {
     try {
       var resBody = await DioManager()
-          .get('/login/login', query: {'email': email,'password':password});
-
+          .get('/login/login', query: {'email': email, 'password': password});
 
       if (resBody['message'].toString() == 'Success') {
         return 0;
@@ -66,8 +63,4 @@ class UserInterface {
 
     return 2;
   }
-
-
-
-
 }

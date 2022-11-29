@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/manager/toast_manager.dart';
+import 'package:fetching_data/manager/user_info_holder.dart';
 import 'package:fetching_data/page/sign_up/sign_up.dart';
 import 'package:fetching_data/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class SignInController {
 
       if (loginResult == 0) {
         Navigator.pop(loadingWidgetContext);
+        UserInfoHolder.email = email;
         NavigatorManager.pushReplaceAll(context, (context) => const Home());
       }
     } catch (e, s) {

@@ -19,6 +19,7 @@ dependencies:
   fluttertoast:
   email_validator:
   card_swiper:
+  like_button:
 
   hive:
   hive_flutter:

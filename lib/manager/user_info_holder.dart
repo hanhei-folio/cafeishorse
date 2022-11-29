@@ -1,6 +1,7 @@
 
 
 class UserInfoHolder {
+  static String? email;
   static int? userId;
 
   // static void signOut(BuildContext context) {

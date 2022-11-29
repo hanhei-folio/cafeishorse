@@ -1,3 +1,4 @@
+import 'package:fetching_data/interface/cafe_interface.dart';
 import 'package:fetching_data/interface/review_interface.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:fetching_data/model/review_model.dart';
@@ -13,6 +14,7 @@ class CafeDetailController {
   CafeModel cafe;
 
   int status = 0;
+  bool? isUserLikingThisCafe;
   List<ReviewModel> reviews = [];
   List<String> reviewPhotoUrls() {
     List<String> ret = [];
@@ -24,6 +26,7 @@ class CafeDetailController {
 
   Future<void> loadData() async {
     try {
+      isUserLikingThisCafe = await CafeInterface.getLike(cafe.id!);
       reviews = await ReviewInterface.get(cafe.id!);
       status = 1;
     } catch (e, s) {
@@ -36,6 +39,8 @@ class CafeDetailController {
   }
 
   Future<void> onLikeButtonClicked() async {
-
+    await CafeInterface.pushLikeButton(cafe.id!, isUserLikingThisCafe!);
+    isUserLikingThisCafe = await CafeInterface.getLike(cafe.id!);
+    refresh();
   }
 }

@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
               fontSize: 52,
             )),
         const SizedBox(height: 10),
-        const Text('welcome back,you\'ve been missed!',
+        const Text('welcome back, you\'ve been missed!',
             style: TextStyle(
               fontSize: 20,
             )),
