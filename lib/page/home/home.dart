@@ -26,7 +26,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Center(
           child: _body(),
@@ -43,7 +42,7 @@ class _HomeState extends State<Home> {
         const Icon(Icons.local_cafe, size: 100),
         SizedBox(height: 48),
         OutlinedButton(
-            onPressed: () => NavigatorManager.pushReplaceAll(
+            onPressed: () => NavigatorManager.push(
                 context, (context) => ChooseKeyword()),
             child: Text('Choose Keyword')),
         SizedBox(height: 24),

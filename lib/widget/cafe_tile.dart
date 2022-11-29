@@ -11,7 +11,8 @@ class CafeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => NavigatorManager.push(context, (context) => CafeDetail(cafe)),
+      onTap: () =>
+          NavigatorManager.push(context, (context) => CafeDetail(cafe)),
       child: Padding(
           padding: EdgeInsets.only(bottom: 12),
           child: Container(
@@ -28,7 +29,7 @@ class CafeTile extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: _image(),
                 ),
-                _description(),
+                Expanded(child: _description()),
               ],
             ),
           )),
@@ -48,9 +49,16 @@ class CafeTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(cafe.placeName.toString()),
+        Text(cafe.placeName.toString(),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
         Text(cafe.roadAddressName.toString()),
-        Text(cafe.star.toString())
+        Row(
+          children: [
+            Icon(Icons.star, color: Colors.yellow),
+            Text(cafe.star.toString()),
+            Spacer(),
+          ],
+        )
       ],
     );
   }

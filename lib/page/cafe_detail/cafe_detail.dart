@@ -1,8 +1,10 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:fetching_data/model/cafe_model.dart';
+import 'package:fetching_data/model/review_model.dart';
 import 'package:fetching_data/page/cafe_detail/cafe_detail_controller.dart';
 import 'package:fetching_data/widget/error_text.dart';
 import 'package:fetching_data/widget/loading_widget.dart';
+import 'package:fetching_data/widget/review_tile.dart';
 import 'package:flutter/material.dart';
 
 class CafeDetail extends StatefulWidget {
@@ -32,11 +34,14 @@ class _CafeDetailState extends State<CafeDetail> {
   }
 
   Widget _body() {
-    return Column(
-      children: [
-        _cafeInfo(),
-        _reviews(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _cafeInfo(),
+          SizedBox(height: 24),
+          _reviews(),
+        ],
+      ),
     );
   }
 
@@ -53,7 +58,9 @@ class _CafeDetailState extends State<CafeDetail> {
             children: [
               Row(
                 children: [
-                  Text(controller.cafe.placeName.toString()),
+                  Text(controller.cafe.placeName.toString(),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   Spacer(),
                   Icon(Icons.favorite)
                 ],
@@ -61,7 +68,13 @@ class _CafeDetailState extends State<CafeDetail> {
               SizedBox(height: 6),
               Text(controller.cafe.roadAddressName.toString()),
               SizedBox(height: 6),
-              Text(controller.cafe.star.toString()),
+              Row(
+                children: [
+                  Icon(Icons.star, color: Colors.yellow),
+                  Text(controller.cafe.star.toString()),
+                  Spacer(),
+                ],
+              ),
             ],
           ),
         ),
@@ -103,6 +116,15 @@ class _CafeDetailState extends State<CafeDetail> {
   }
 
   Widget _reviews() {
-    return Container();
+    List<ReviewModel> reviews = controller.reviews;
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          for (var review in reviews) ReviewTile(review),
+        ],
+      ),
+    );
   }
 }
