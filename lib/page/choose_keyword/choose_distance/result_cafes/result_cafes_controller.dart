@@ -12,12 +12,15 @@ class ResultCafesController {
   VoidCallback refresh;
 
   int status = 0;
+  List<CafeModel> baseCafes = [];
   List<CafeModel> cafes = [];
+  bool isDistanceSorted = false;
 
   Future<void> loadData(
       List<String> pickedKeywords, String pickedDistance) async {
     try {
-      cafes = await CafeInterface.get(pickedKeywords, pickedDistance);
+      baseCafes = await CafeInterface.get(pickedKeywords, pickedDistance);
+      cafes.addAll(baseCafes);
       status = 1;
     } catch (e, s) {
       print(e);
@@ -26,5 +29,16 @@ class ResultCafesController {
     } finally {
       refresh();
     }
+  }
+
+  void onDistanceSortButtonClicked() {
+    if (isDistanceSorted) {
+      cafes.clear();
+      cafes.addAll(baseCafes);
+    } else {
+      // TODO 카페 위치(위도경도), 내 위치(위도경도) 이용하여 거리 계산, 정렬
+      cafes.sort();
+    }
+    refresh();
   }
 }

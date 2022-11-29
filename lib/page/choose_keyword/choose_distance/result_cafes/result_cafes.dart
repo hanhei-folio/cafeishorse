@@ -1,5 +1,7 @@
+import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:fetching_data/page/choose_keyword/choose_distance/result_cafes/result_cafes_controller.dart';
+import 'package:fetching_data/page/home/home.dart';
 import 'package:fetching_data/widget/cafe_tile.dart';
 import 'package:fetching_data/widget/error_text.dart';
 import 'package:fetching_data/widget/loading_widget.dart';
@@ -56,10 +58,12 @@ class _ResultCafesState extends State<ResultCafes> {
           children: [
             SizedBox(width: 12),
             OutlinedButton(onPressed: () {}, child: Text('거리순')),
-            SizedBox(width: 12),
-            OutlinedButton(onPressed: () {}, child: Text('찜순')),
             Spacer(),
-            OutlinedButton(onPressed: () {}, child: Text('돌아가기')),
+            OutlinedButton(
+                onPressed: () {
+                  NavigatorManager.pushReplaceAll(context, (context) => Home());
+                },
+                child: Text('돌아가기')),
             SizedBox(width: 12),
           ],
         ),
@@ -68,10 +72,7 @@ class _ResultCafesState extends State<ResultCafes> {
             padding: EdgeInsets.only(left: 12, right: 12, top: 12),
             child: SingleChildScrollView(
               child: Column(
-                children: [
-                  for (var cafe in cafes)
-                    CafeTile(cafe)
-                ],
+                children: [for (var cafe in cafes) CafeTile(cafe)],
               ),
             ),
           ),

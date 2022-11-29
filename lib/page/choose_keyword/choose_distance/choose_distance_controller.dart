@@ -4,7 +4,9 @@ import 'package:fetching_data/page/choose_keyword/choose_distance/result_cafes/r
 import 'package:flutter/cupertino.dart';
 
 class ChooseDistanceController {
-  ChooseDistanceController(this.context, this.refresh, this.pickedKeywords);
+  ChooseDistanceController(this.context, this.refresh, this.pickedKeywords) {
+    askLocationPermission();
+  }
 
   BuildContext context;
   VoidCallback refresh;
@@ -33,5 +35,10 @@ class ChooseDistanceController {
 
     NavigatorManager.push(
         context, (context) => ResultCafes(pickedKeywords, pickedDistance));
+  }
+
+  Future<void> askLocationPermission() async {
+    // TODO 위치정보 요청 https://pub.dev/packages/permission_handler
+    // TODO 거절시 신촌역으로 합니다 토스트 띄우기
   }
 }

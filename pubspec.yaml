@@ -20,6 +20,7 @@ dependencies:
   email_validator:
   card_swiper:
   like_button:
+  permission_handler:
 
   hive:
   hive_flutter:
