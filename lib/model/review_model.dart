@@ -3,30 +3,35 @@ class ReviewModel {
     contents = json['contents'];
     date = json['date'];
     if (json['id'] != null) {
-      id = int.parse(json['id']);
+      id = int.parse(json['id'].toString());
     }
     id = json['id'];
     kakaoMapUserId = json['kakaomapuserid'];
     if (json['likecnt'] != null) {
-      likecnt = int.parse(json['likecnt']);
+      likecnt = int.parse(json['likecnt'].toString());
     }
     if (json['photocnt'] != null) {
-      photocnt = int.parse(json['photocnt']);
+      photocnt = int.parse(json['photocnt'].toString());
     }
     if (json['photolist'] != null) {
-      for (var url in json['photolist']) {
-        photoUrls.add(url.toString());
+      String joinedList = json['photolist'].toString();
+      joinedList = joinedList.replaceAll('[', '');
+      joinedList = joinedList.replaceAll(']', '');
+      joinedList = joinedList.replaceAll(' ', '');
+      joinedList = joinedList.replaceAll('\'', '');
+      if (joinedList.isNotEmpty) {
+        photoUrls = joinedList.split(',');
       }
     }
     if (json['point'] != null) {
-      point = int.parse(json['point']);
+      point = int.parse(json['point'].toString());
     }
     if (json['store'] != null) {
-      cafeId = int.parse(json['store']);
+      cafeId = int.parse(json['store'].toString());
     }
     userCommentAverageScore = json['usercommentaveragescore'];
     if (json['usercommentcount'] != null) {
-      userCommentCnt = int.parse(json['usercommentcount']);
+      userCommentCnt = int.parse(json['usercommentcount'].toString());
     }
     username = json['username'];
   }
