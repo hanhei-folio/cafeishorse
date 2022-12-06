@@ -21,6 +21,7 @@ dependencies:
   card_swiper:
   like_button:
   permission_handler:
+  location:
 
   hive:
   hive_flutter:

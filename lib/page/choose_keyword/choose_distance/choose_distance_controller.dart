@@ -1,16 +1,19 @@
+import 'package:fetching_data/constant/constants.dart';
 import 'package:fetching_data/manager/navigator_manager.dart';
+import 'package:fetching_data/manager/location_manager.dart';
 import 'package:fetching_data/manager/toast_manager.dart';
 import 'package:fetching_data/page/choose_keyword/choose_distance/result_cafes/result_cafes.dart';
 import 'package:flutter/cupertino.dart';
 
 class ChooseDistanceController {
   ChooseDistanceController(this.context, this.refresh, this.pickedKeywords) {
-    askLocationPermission();
+    askLocation();
   }
 
   BuildContext context;
   VoidCallback refresh;
   List<String> pickedKeywords;
+  String x = sinchonStationX, y = sinchonStationY;
 
   List<String> distances = ['100m', '200m', '500m', '1km'];
   String pickedDistance = '';
@@ -37,8 +40,15 @@ class ChooseDistanceController {
         context, (context) => ResultCafes(pickedKeywords, pickedDistance));
   }
 
-  Future<void> askLocationPermission() async {
-    // TODO 위치정보 요청 https://pub.dev/packages/permission_handler
-    // TODO 거절시 신촌역으로 합니다 토스트 띄우기
+  Future<void> askLocation() async {
+    bool result = await LocationManager.askLocationPermission();
+
+    if (result) {
+      var locationData = await LocationManager.getCurrentLocation();
+      if (locationData.latitude != null) x = locationData.latitude.toString();
+      if (locationData.longitude != null) y = locationData.longitude.toString();
+    } else {
+      ToastManager.toastInfo('신촌역을 기준으로 검색하겠습니다.');
+    }
   }
 }
