@@ -1,8 +1,12 @@
 import 'package:fetching_data/constant/constants.dart';
+import 'package:fetching_data/model/cafe_model.dart';
 import 'package:location/location.dart';
+import 'package:maps_toolkit/maps_toolkit.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LocationManager {
+  static String x = sinchonStationX, y = sinchonStationY;
+
   static Future<bool> askLocationPermission() async {
     await Permission.location.request();
     var status = await Permission.location.status;
@@ -26,6 +30,9 @@ class LocationManager {
       var locationData = await LocationManager.getCurrentLocation();
       if (locationData.latitude != null) x = locationData.latitude.toString();
     }
+
+    LocationManager.x = x;
+
     return x;
   }
 
@@ -37,6 +44,19 @@ class LocationManager {
       var locationData = await LocationManager.getCurrentLocation();
       if (locationData.latitude != null) y = locationData.longitude.toString();
     }
+
+    LocationManager.y = y;
+
     return y;
+  }
+
+  static int getDistance(CafeModel cafe) {
+    try {
+      LatLng userLatLng = LatLng(double.parse(x), double.parse(y));
+      LatLng cafeLatLng = LatLng(double.parse(cafe.x!), double.parse(cafe.y!));
+      return SphericalUtil.computeDistanceBetween(userLatLng, cafeLatLng).toInt();
+    } catch (e, s) {
+      return 1000; // 카페 x, y 정보가 없을 시 1000m 취급을 합니다.
+    }
   }
 }

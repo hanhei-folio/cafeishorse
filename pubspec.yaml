@@ -22,6 +22,7 @@ dependencies:
   like_button:
   permission_handler:
   location:
+  maps_toolkit:
 
   hive:
   hive_flutter:

@@ -1,3 +1,4 @@
+import 'package:fetching_data/constant/constants.dart';
 import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:fetching_data/page/choose_keyword/choose_distance/result_cafes/result_cafes_controller.dart';
@@ -57,7 +58,46 @@ class _ResultCafesState extends State<ResultCafes> {
         Row(
           children: [
             SizedBox(width: 12),
-            OutlinedButton(onPressed: () {}, child: Text('거리순')),
+            OutlinedButton(
+                onPressed: () => controller.onDistanceSortButtonClicked(),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith((_) {
+                  return controller.isDistanceSorted
+                      ? Colors.yellow
+                      : primaryColor;
+                })),
+                child: Text('거리순',
+                    style: TextStyle(
+                        color: controller.isDistanceSorted
+                            ? Colors.black
+                            : Colors.white))),
+            // OutlinedButton(
+            //     onPressed: () => controller.onDistanceSortButtonClicked(),
+            //     style: ButtonStyle(
+            //         backgroundColor: MaterialStateProperty.resolveWith((_) {
+            //           return controller.isDistanceSorted
+            //               ? Colors.yellow
+            //               : primaryColor;
+            //         })),
+            //     child: Text('리뷰많은순',
+            //         style: TextStyle(
+            //             color: controller.isDistanceSorted
+            //                 ? Colors.black
+            //                 : Colors.white))),
+            SizedBox(width: 12),
+            OutlinedButton(
+                onPressed: () => controller.onStarCountSortButtonClicked(),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith((_) {
+                      return controller.isStarCountSorted
+                          ? Colors.yellow
+                          : primaryColor;
+                    })),
+                child: Text('별점순',
+                    style: TextStyle(
+                        color: controller.isStarCountSorted
+                            ? Colors.black
+                            : Colors.white))),
             Spacer(),
             OutlinedButton(
                 onPressed: () {

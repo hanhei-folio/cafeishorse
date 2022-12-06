@@ -8,7 +8,7 @@ class CafeInterface {
     if (pickedDistance == '1km') pickedDistance = '1000m';
     pickedDistance = pickedDistance.replaceAll('m', '');
     var resBody = await DioManager().get('/quiz/cafe', query: {
-      'count': '10', // TODO 마지막에 50 개로 수정
+      'count': '100',
       'keyword1': pickedKeywords[0],
       'keyword2': pickedKeywords[1],
       'keyword3': pickedKeywords[2],
