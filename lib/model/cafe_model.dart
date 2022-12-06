@@ -24,22 +24,3 @@ class CafeModel {
   String? star;
   int? bookmarkCount;
 }
-
-
-
-// import 'dart:convert';
-//
-// class CafeModel {
-//   CafeModel.fromJson(dynamic jsonString) {
-//
-//     name = jsonString['name'];
-//     charactor = jsonString['charactor'];
-//     grade = jsonString['grade'];
-//     location = jsonString['Location'];
-//   }
-//
-//   String? name;
-//   String? charactor;
-//   int? grade;
-//   String? location;
-// }

@@ -28,7 +28,7 @@ class LocationManager {
 
     if (result) {
       var locationData = await LocationManager.getCurrentLocation();
-      if (locationData.latitude != null) x = locationData.latitude.toString();
+      if (locationData.longitude != null) x = locationData.longitude.toString();
     }
 
     LocationManager.x = x;
@@ -42,7 +42,7 @@ class LocationManager {
 
     if (result) {
       var locationData = await LocationManager.getCurrentLocation();
-      if (locationData.latitude != null) y = locationData.longitude.toString();
+      if (locationData.latitude != null) y = locationData.latitude.toString();
     }
 
     LocationManager.y = y;

@@ -1,3 +1,4 @@
+import 'package:fetching_data/manager/location_manager.dart';
 import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:fetching_data/page/cafe_detail/cafe_detail.dart';
@@ -30,6 +31,9 @@ class CafeTile extends StatelessWidget {
                   child: _image(),
                 ),
                 Expanded(child: _description()),
+                SizedBox(width: 12),
+                _distance(),
+                SizedBox(width: 12),
               ],
             ),
           )),
@@ -61,5 +65,10 @@ class CafeTile extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget _distance() {
+    int distance = LocationManager.getDistance(cafe);
+    return Text('${distance}m');
   }
 }

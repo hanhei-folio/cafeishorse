@@ -37,6 +37,7 @@ class ResultCafesController {
 
   bool isDistanceSorted = false;
   Future<void> onDistanceSortButtonClicked() async {
+    isStarCountSorted = false;
     if (isDistanceSorted) {
       cafes.clear();
       cafes.addAll(baseCafes);
@@ -65,6 +66,7 @@ class ResultCafesController {
 
   bool isStarCountSorted = false;
   Future<void> onStarCountSortButtonClicked() async {
+    isDistanceSorted = false;
     if (isStarCountSorted) {
       cafes.clear();
       cafes.addAll(baseCafes);
