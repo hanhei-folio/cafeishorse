@@ -43,11 +43,7 @@ class ChooseDistanceController {
   Future<void> askLocation() async {
     bool result = await LocationManager.askLocationPermission();
 
-    if (result) {
-      var locationData = await LocationManager.getCurrentLocation();
-      if (locationData.latitude != null) x = locationData.latitude.toString();
-      if (locationData.longitude != null) y = locationData.longitude.toString();
-    } else {
+    if (!result) {
       ToastManager.toastInfo('신촌역을 기준으로 검색하겠습니다.');
     }
   }

@@ -4,10 +4,17 @@ import 'package:fetching_data/model/cafe_model.dart';
 
 class CafeInterface {
   static Future<List<CafeModel>> get(
-      List<String> pickedKeywords, String pickedDistance) async {
-    // TODO 선택한 키워드와 거리 정보를 전달하기
+      List<String> pickedKeywords, String pickedDistance, String x, String y) async {
+    if (pickedDistance == '1km') pickedDistance = '1000m';
+    pickedDistance = pickedDistance.replaceAll('m', '');
     var resBody = await DioManager().get('/quiz/cafe', query: {
-      'count': '10'
+      'count': '10', // TODO 마지막에 50 개로 수정
+      'keyword1': pickedKeywords[0],
+      'keyword2': pickedKeywords[1],
+      'keyword3': pickedKeywords[2],
+      'loc': pickedDistance,
+      'x': x,
+      'y': y
     });
 
     List<CafeModel> ret = [];

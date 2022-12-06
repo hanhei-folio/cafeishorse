@@ -1,4 +1,5 @@
 import 'package:fetching_data/interface/cafe_interface.dart';
+import 'package:fetching_data/manager/location_manager.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,7 +20,9 @@ class ResultCafesController {
   Future<void> loadData(
       List<String> pickedKeywords, String pickedDistance) async {
     try {
-      baseCafes = await CafeInterface.get(pickedKeywords, pickedDistance);
+      String x = await LocationManager.getCurrentLatitude();
+      String y = await LocationManager.getCurrentLongitude();
+      baseCafes = await CafeInterface.get(pickedKeywords, pickedDistance, x, y);
       cafes.addAll(baseCafes);
       status = 1;
     } catch (e, s) {
