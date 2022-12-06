@@ -2,6 +2,7 @@ import 'package:fetching_data/manager/navigator_manager.dart';
 import 'package:fetching_data/model/cafe_model.dart';
 import 'package:fetching_data/page/choose_keyword/choose_keyword.dart';
 import 'package:fetching_data/page/home/home_controller.dart';
+import 'package:fetching_data/page/liked_cafes/liked_cafes.dart';
 import 'package:fetching_data/page/sign_in/sign_in.dart';
 import 'package:fetching_data/widget/cafe_tile.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +48,8 @@ class _HomeState extends State<Home> {
             child: Text('Choose Keyword')),
         SizedBox(height: 24),
         OutlinedButton(
-            onPressed: () {
-              // TODO 찜한 목록으로 가기
-            },
+            onPressed: () => NavigatorManager.push(
+                context, (context) => LikedCafes()),
             child: Text('내가 찜한 목록')),
         SizedBox(height: 72),
         Row(

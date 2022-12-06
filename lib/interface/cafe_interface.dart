@@ -8,13 +8,29 @@ class CafeInterface {
     if (pickedDistance == '1km') pickedDistance = '1000m';
     pickedDistance = pickedDistance.replaceAll('m', '');
     var resBody = await DioManager().get('/quiz/cafe', query: {
-      'count': '100',
+      'count': '30',
       'keyword1': pickedKeywords[0],
       'keyword2': pickedKeywords[1],
       'keyword3': pickedKeywords[2],
       'loc': pickedDistance,
       'x': x,
       'y': y
+    });
+
+    List<CafeModel> ret = [];
+
+    if (resBody['data'] != null) {
+      for (var e in resBody['data']) {
+        ret.add(CafeModel.fromJson(e));
+      }
+    }
+
+    return ret;
+  }
+
+  static Future<List<CafeModel>> getLikedCafes() async {
+    var resBody = await DioManager().get('/quiz/cafe/bookmark/list', query: {
+      'email': UserInfoHolder.email
     });
 
     List<CafeModel> ret = [];
