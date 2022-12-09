@@ -7,9 +7,6 @@ class CafeInterface {
       List<String> pickedKeywords, String pickedDistance, String x, String y) async {
     if (pickedDistance == '1km') pickedDistance = '1000m';
     pickedDistance = pickedDistance.replaceAll('m', '');
-
-    // /quiz/cafe/recommend?keyword1=&keyword2=&keyword3=&x=&y=&loc=
-
     var resBody = await DioManager().get('/quiz/cafe/recommend', query: {
       'keyword1': pickedKeywords[0],
       'keyword2': pickedKeywords[1],
@@ -18,9 +15,7 @@ class CafeInterface {
       'x': x,
       'y': y
     });
-
     print(resBody['data']);
-
     List<CafeModel> ret = [];
 
     if (resBody['data'] != null) {

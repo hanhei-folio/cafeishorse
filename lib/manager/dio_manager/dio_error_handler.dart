@@ -28,7 +28,7 @@ class DioErrorHandler extends Interceptor {
       case DioErrorType.cancel:
         break;
       case DioErrorType.other:
-        throw NoInternetConnectionException(err.requestOptions);
+        // throw NoInternetConnectionException(err.requestOptions);
     }
 
     return handler.next(err);
