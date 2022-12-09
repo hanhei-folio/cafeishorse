@@ -50,11 +50,13 @@ class LocationManager {
     return y;
   }
 
+  // 반환 단위 미터(m)
   static int getDistance(CafeModel cafe) {
     try {
       LatLng userLatLng = LatLng(double.parse(x), double.parse(y));
       LatLng cafeLatLng = LatLng(double.parse(cafe.x!), double.parse(cafe.y!));
-      return SphericalUtil.computeDistanceBetween(userLatLng, cafeLatLng).toInt();
+      return SphericalUtil.computeDistanceBetween(userLatLng, cafeLatLng)
+          .toInt();
     } catch (e, s) {
       return 1000; // 카페 x, y 정보가 없을 시 1000m 취급을 합니다.
     }

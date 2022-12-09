@@ -40,7 +40,7 @@ class _ChooseDistanceState extends State<ChooseDistance> {
                 runSpacing: 12,
                 alignment: WrapAlignment.center,
                 children: [
-                  for (int i = 0; i < 4; i++) _distanceTile(i),
+                  for (int i = 0; i < 5; i++) _distanceTile(i),
                 ],
               ),
               Expanded(
@@ -72,8 +72,8 @@ class _ChooseDistanceState extends State<ChooseDistance> {
             color: Colors.brown,
             borderRadius: BorderRadius.circular(36),
           ),
-          child:
-              Center(child: Text(distance, style: TextStyle(color: Colors.white))),
+          child: Center(
+              child: Text(distance, style: TextStyle(color: Colors.white))),
         ),
       );
     } else {
@@ -87,8 +87,8 @@ class _ChooseDistanceState extends State<ChooseDistance> {
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(36),
           ),
-          child:
-              Center(child: Text(distance, style: TextStyle(color: Colors.black))),
+          child: Center(
+              child: Text(distance, style: TextStyle(color: Colors.black))),
         ),
       );
     }

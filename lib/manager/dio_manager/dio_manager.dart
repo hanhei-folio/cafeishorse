@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:fetching_data/constant/constants.dart';
-import 'package:fetching_data/manager/dio_manager/dio_error_handler.dart';
 import 'package:fetching_data/manager/dio_manager/dio_token_handler.dart';
 
 class DioManager {
@@ -22,7 +21,6 @@ class DioManager {
 
     dio.options.contentType = Headers.jsonContentType;
     dio.interceptors.add(DioTokenHandler(dio));
-    dio.interceptors.add(DioErrorHandler(dio));
 
     return dio;
   }

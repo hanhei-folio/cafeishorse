@@ -15,7 +15,7 @@ class ChooseDistanceController {
   List<String> pickedKeywords;
   String x = sinchonStationX, y = sinchonStationY;
 
-  List<String> distances = ['100m', '200m', '500m', '1km'];
+  List<String> distances = ['100m', '200m', '500m', '1km', '제한 없음'];
   String pickedDistance = '';
 
   void onDistanceClicked(int index) {
