@@ -15,7 +15,8 @@ class CafeInterface {
       'x': x,
       'y': y
     });
-    print(resBody['data']);
+
+
     List<CafeModel> ret = [];
 
     if (resBody['data'] != null) {
